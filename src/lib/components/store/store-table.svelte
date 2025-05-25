@@ -5,7 +5,8 @@
 	export let Columns: any;
 	export let Rows: any;
 	export let key: string;
-    export let title : string
+	export let title: string;
+
 	//Search
 	let search = '';
 	$: filteredData = Rows.filter((item: any) =>
@@ -36,12 +37,12 @@
 					</Table.Row>
 				{/each}
 			{:else}
-            <Table.Row>
-                <Table.Cell class="text-center py-4 text-[#666] italic" colspan={Columns.length}>
-                    Data Tidak Ditemukan
-                </Table.Cell>
-            </Table.Row>
-            {/if}
+				<Table.Row>
+					<Table.Cell class="py-4 text-center text-[#666] italic" colspan={Columns.length}>
+						Data Tidak Ditemukan
+					</Table.Cell>
+				</Table.Row>
+			{/if}
 		</Table.Body>
 	</Table.Root>
 </main>

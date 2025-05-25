@@ -9,7 +9,7 @@
 	$: path = $page.url.pathname;
 </script>
 
-<nav class="w-full h-full flex-col p-4 gap-5 border-black border-r hidden md:flex">
+<nav class="w-full h-full flex-col p-4 gap-5 border-black border-r hidden md:flex ">
 	<div class="w-full flex items-center gap-2 justify-start">
 		{#if $profile}
 			<img
@@ -24,7 +24,7 @@
 			<Button
 				class={`${ path === "/dashboard" ? 'bg-gradient-to-br from-orange-600 to-orange-200 text-white' : 'bg-transparent text-orange-600'} hover:bg-orange-300 w-full flex justify-start items-center transition duration-500 cursor-pointer`}
 				onclick={() => goto("/dashboard")}
-				>
+			>
 				Profile
 			</Button>
 			<Button
@@ -32,6 +32,12 @@
 				onclick={() => goto(`/dashboard/store`)}
 				>
 				Store
+			</Button>
+			<Button
+				class={`${path.startsWith("/dashboard/product") ? 'bg-gradient-to-br from-orange-600 to-orange-200 text-white' : 'bg-transparent text-orange-600'} hover:bg-orange-300 w-full flex justify-start items-center transition duration-500 cursor-pointer`}
+				onclick={() => goto(`/dashboard/product`)}
+				>
+				Product
 			</Button>
 	</div>
 </nav>

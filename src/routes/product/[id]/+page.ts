@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { fetcherGet } from '$lib/helpers/fetcher.js';
+import { productApi } from '$lib/api/product-api.js';
 
-export async function load({params}) {
-    try {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
-    const {data} = await fetcherGet({url : `${baseUrl}/product/${params.id}`})
+export async function load({ params }) {
+	try {
+		const data= await productApi.getProductById({ id: params.id });
 
-    return {
-        product: data.product || {}, 
-        category : data.category || [],
-    }
-    } catch (error) {
-     return {product : null}
-    }
+		return {
+			product: data.product || {},
+			category: data.category || []
+		};
+	} catch (error) {
+		console.log(error);
+		return { product: null };
+	}
 }

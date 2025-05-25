@@ -15,7 +15,7 @@
 	})
 </script>
 
-<div class="bg-white w-full min-h-screen flex">
+<div class="bg-gray-200 w-full min-h-screen flex">
 	<div class="w-[25%] hidden md:flex">
 		<NavbarDash />
 	</div>

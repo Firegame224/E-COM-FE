@@ -26,7 +26,7 @@
 		<div class="bg-light-300 line-clamp-2 flex w-full flex-col gap-2 md:w-3/5 md:p-5">
 			<div class="w-full flex items-center justify-between min-h-20">
                 <p class="text-[28px] font-bold">{product.product_name}</p>
-                <p class="text-[20px] p-2 font-bold bg-gradient-to-br from-orange-600 to-orange-200 rounded-md">{product.status}</p>
+                <p class={`${product.status === "Tersedia" ? "bg-green-600" : "bg-red-600" } text-[15px] p-2 font-bold rounded-md`}>{product.status}</p>
             </div>
 			<p class="font-semibold">Deskripsi :</p>
             <p class="text-md font-serif">{product.description || "Deskripsi Mungkin belum di tambahkan"}</p>
@@ -50,7 +50,7 @@
 		</div>
 	</div>
     <div transition:fade={{duration : 500}} class="shadow-1 flex justify-between gap-2 rounded bg-white p-5 flex-row md:pl-20 relative">
-        <a href= {`/store/${product.Store.id}`} class="group w-14 h-14 bg-gray-200 p-2 rounded-full">
+        <a href={`/store/${product.Store.id}`} class="group w-14 h-14 bg-gray-200 p-2 rounded-full">
             <StoreIcon class="w-full h-full group-hover:animate-spin transition duration-700"/>
         </a>
         <div class="flex flex-col w-[94%]">

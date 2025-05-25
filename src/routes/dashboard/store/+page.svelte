@@ -14,11 +14,11 @@
 
 	let { stores } = page.data;
 
-	let isopen = $state(false);
-	let isLoading = $state(false);
+	let isopen = false;
+	let isLoading = false;
 
-	let name = $state('');
-	let info = $state('');
+	let name = '';
+	let info = '';
 
 	const handleSubmit = async (e: SubmitEvent) => {
 		e.preventDefault();

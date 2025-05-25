@@ -29,7 +29,7 @@
 		isLoading = true;
 		try {
 			await userApi.updateUser({ name: Name, bio: Bio, image });
-
+			
 			toggleEdit();
 			await goto('/dashboard', { invalidateAll: true });
 		} finally {
@@ -101,7 +101,7 @@
 			<Textarea
 				name="bio"
 				bind:value={Bio}
-				class="w-full border-white border-3 text-black text-sm md:text-[15px] bg-white font-semibold h-36"
+				class="w-full border-white border-3 text-black text-sm md:text-[14px] bg-white font-semibold h-36 resize-none"
 				disabled={!onEdit}
 			/>
 		</div>

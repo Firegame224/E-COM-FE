@@ -1,8 +1,6 @@
-import { fetcherGet } from "$lib/helpers/fetcher";
+import { productApi } from "$lib/api/product-api";
 
 export async function load() {
-    const baseUrl = import.meta.env.VITE_BASE_URL
-    const {data} = await fetcherGet({url : `${baseUrl}/product`})
-
+    const data = await productApi.getAllProducts()
     return {product : data}
 }

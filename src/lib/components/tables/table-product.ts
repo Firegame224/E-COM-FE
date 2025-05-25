@@ -23,8 +23,5 @@ export const productColumns = [
 	{
 		key: 'status',
 		label: 'Status',
-        color : {
-            
-        }
 	}
 ];
