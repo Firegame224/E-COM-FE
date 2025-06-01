@@ -71,7 +71,6 @@ export const storeApi = {
 			} else {
 				toast.error('Client Error');
 			}
-			return
 			console.error(error);
 		}
 	},

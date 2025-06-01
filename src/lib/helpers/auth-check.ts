@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { profile } from '$lib/stores/user-store';
+import { isLogin, profile } from '$lib/stores/user-store';
 import axios from 'axios';
-import toast from 'svelte-french-toast';
 
 export const authSession = async () => {
 	try {
@@ -15,11 +14,11 @@ export const authSession = async () => {
 		const data = response.data.data;
 		
 		profile.set(data)
-		
+		isLogin.set(true)
 		return data;
 	} catch (error) {
 		profile.set(null)
-		toast.error("Session Expired")
+		isLogin.set(false)
 		return null;
 	}
 };

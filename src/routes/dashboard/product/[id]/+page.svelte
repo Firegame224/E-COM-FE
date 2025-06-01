@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/state';
+	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
@@ -11,22 +11,23 @@
 	import { fade } from 'svelte/transition';
 	import ImageUpload from '$lib/components/image-upload.svelte';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
-	import { productApi } from '$lib/api/product-api';
+	import { productApi } from '$lib/providers/product-api';
 	import ProductToggle from '$lib/components/product/product-toggle.svelte';
+	import { catApi } from '$lib/providers/category-api';
 
-	let { product, category } = page.data;
+	$: product = $page.data.product;
+	$: category = $page.data.category;
 
-	console.log(category);
 	// State
 	let isOpen = false;
 	let isLoading = false;
 	let onEdit = false;
 
 	// Value input
-	let name = '';
-	let description = '';
-	let stok = 0;
-	let price = 0;
+	$: name = '';
+	$: description = '';
+	$: stok = 0;
+	$: price = 0;
 	let image: File | string | undefined;
 
 	// Category
@@ -47,11 +48,11 @@
 				name,
 				description,
 				stok,
-				storeId: product.storeId,
+				storeId: product.product.storeId,
 				price,
 				image
 			});
-			goto(`/dashboard/product`, { invalidateAll: true });
+
 		} catch (error) {
 			toast.error(`${error}`);
 		} finally {
@@ -64,7 +65,6 @@
 		isLoading = true;
 		try {
 			await productApi.deleteById({ id: product.product.id });
-			goto('/dashboard/product', { invalidateAll: true });
 		} catch (error) {
 			toast.error(`${error}`);
 		} finally {
@@ -77,9 +77,7 @@
 		e.preventDefault();
 		isLoading = true;
 		try {
-			await productApi.addProductCategory({ id: product.product.id, name: onSelected });
-
-			goto(`/dashboard/product`, { invalidateAll: true });
+			await catApi.addProductCategory({ id: product.product.id, name: onSelected });
 		} catch (error) {
 			toast.error(`${error}`);
 		} finally {
@@ -89,9 +87,8 @@
 
 	const deleteCategories = async () => {
 		try {
-			await productApi.deleteProductCategory({ id: product.product.id });
+			await catApi.deleteProductCategory({ id: product.product.id });
 			onSelected = [];
-			goto(`/dashboard/product/${product.product.id}`, { invalidateAll: true });
 		} catch (error) {
 			toast.error(`${error}`);
 		}
@@ -184,6 +181,7 @@
 					<Input
 						id="price"
 						name="price"
+						type="number"
 						bind:value={price}
 						class="border-2 border-black bg-white text-sm font-semibold text-black md:text-[15px]"
 						disabled={!onEdit}
@@ -195,6 +193,7 @@
 					<Input
 						id="stok"
 						name="stok"
+						type="number"
 						bind:value={stok}
 						class="border-2 border-black bg-white text-sm font-semibold text-black md:text-[15px]"
 						disabled={!onEdit}
@@ -225,7 +224,7 @@
 						class="w-full cursor-pointer bg-[#f44336] hover:bg-orange-300"
 						onclick={() => (onEdit = true)}
 					>
-						Ubah Store
+						Ubah Produk
 					</Button>
 				{/if}
 			</div>

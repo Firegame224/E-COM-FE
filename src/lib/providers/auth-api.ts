@@ -27,7 +27,7 @@ export const authApi = {
 			if (response.status === 200 || response.status === 201) {
 				isLogin.set(true)
 				toast.success(`Login Berhasil`);
-				goto('/', {invalidateAll : true});
+				goto('/dashboard', {invalidateAll : true});
 			} else {
 				toast.error(`${response.data?.message}`);
 			}
@@ -41,6 +41,7 @@ export const authApi = {
 			console.error(error);
 		}
 	},
+	
 	async register(e: SubmitEvent, { email, password }: AuthSignProps) {
 		e.preventDefault();
 		try {
@@ -77,6 +78,8 @@ export const authApi = {
 
 		if (response.status ===  200) {
 			toast.success("Logout Berhasil")
+			goto("/");
+			window.location.reload();
 		}	
 	} catch (error) {
 			if (axios.isAxiosError(error)) {

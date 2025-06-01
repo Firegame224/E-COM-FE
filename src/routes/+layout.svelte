@@ -2,12 +2,14 @@
 	import '../app.css';
 	import { Toaster } from 'svelte-french-toast';
 	import Navbar from '$lib/components/navbar.svelte';
+	import Footer from '$lib/components/footer.svelte';
 
 	let { children } = $props();
 </script>
 
-<Navbar />
-<div class="bg-gray-300 min-h-screen">
+<Toaster />
+<div class="flex min-h-screen flex-col bg-gray-300">
+	<Navbar />
 	{@render children()}
-	<Toaster />
+	<Footer/>
 </div>

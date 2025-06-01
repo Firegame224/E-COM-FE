@@ -8,7 +8,7 @@
 	import type { StoresTypes } from '$lib/types/store-types';
 	import { Button } from "$lib/components/ui/button";
 	import ImageUpload from '$lib/components/image-upload.svelte';
-	import { userApi } from '$lib/api/user-api';
+	import { userApi } from '$lib/providers/user-api';
 	import { onMount } from 'svelte';
 	import { fade, scale } from 'svelte/transition';
 	import StoreCard from '../store/store-card.svelte';
@@ -46,7 +46,7 @@
 </script>
 
 <main
-	class="w-full h-full justify-center flex flex-col md:flex-row gap-5 shadow bg-gradient-to-br from-orange-600 to-orange-200 py-5 rounded-sm shadow-black"
+	class="w-full h-full justify-center flex flex-col md:flex-row gap-5 shadow bg-gradient-to-br from-orange-700 to-orange-200 py-5 rounded-sm shadow-black"
 >
 	<form
 		transition:fade={{ duration: 700 }}

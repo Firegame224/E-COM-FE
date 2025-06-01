@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { StoreIcon } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
-	import { flip } from 'svelte/animate';
 	import type { ProductType } from '$lib/types/product-types';
+	import { Separator } from '../ui/separator';
 
 	export let Api : ProductType[]
 	const handleClick = ({id} : {id : String}) => {
@@ -10,28 +10,28 @@
 	}
 </script>
 
-<div class="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+<div class="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
 	{#each Api as prod (prod?.id)}
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<div
-		animate:flip
 		on:click={() => handleClick({ id : prod.id})}
 		class="group relative cursor-pointer rounded-md rounded-b-none bg-white shadow shadow-black"
 		>
 			<div
-				class="relative flex flex-col items-center justify-center rounded-md rounded-b-none p-2 pb-0 transition duration-500 group-hover:border-3 group-hover:border-orange-600"
+				class="relative p-1 flex flex-col items-center justify-center rounded-md rounded-b-none pb-0 transition duration-500 group-hover:border-3 group-hover:border-orange-600"
 			>
-				<div class="h-[200px] w-full">
+				<div class="h-[130px] md:h-[150px] w-full">
 					<img
 						src={prod.image ||
 							'https://i.pinimg.com/736x/5e/39/6b/5e396bb1b17681759922dd10f8a9d702.jpg'}
 						alt={prod.product_name}
-						class="h-full w-full rounded-md object-cover transition duration-500 group-hover:scale-105"
+						class="h-full w-full rounded-t-md object-cover transition duration-500 group-hover:scale-105"
 					/>
 				</div>
-				<div class="line-clamp-2 flex h-25 w-full flex-col justify-between p-5">
-					<p>{prod.product_name}</p>
+				<Separator class="w-full"/>
+				<div class="flex h-25 w-full flex-col justify-between p-5 ">
+					<p class="line-clamp-1 text-sm md:text-lg">{prod.product_name}</p>
 					<p class="font-semibold text-orange-600">Rp {prod.price.toLocaleString()}</p>
 				</div>
 			</div>

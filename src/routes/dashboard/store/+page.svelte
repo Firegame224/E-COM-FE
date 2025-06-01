@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { storeApi } from '$lib/api/store-api';
+	import { storeApi } from '$lib/providers/store-api';
 	import { Button } from '$lib/components/ui/button';
 	import StoreCard from '$lib/components/store/store-card.svelte';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import Dialog from '$lib/components/dialog.svelte';
 	import { Loader, Plus } from '@lucide/svelte';
-	import toast from 'svelte-french-toast';
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 
@@ -86,7 +85,7 @@
 			</div>
 			<div>
 				<Button
-					onclick={() => (isopen = true)}
+					onclick={() => isopen = true}
 					class=" flex cursor-pointer bg-orange-600 text-white transition duration-700 hover:bg-orange-500"
 				>
 					<Plus class="h-10 w-10" />

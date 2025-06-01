@@ -2,7 +2,7 @@
 	// @ts-nocheck
 
 	import toast from 'svelte-french-toast';
-	import { authApi } from '$lib/api/auth-api';
+	import { authApi } from '$lib/providers/auth-api';
 	let onChecked = false;
 	let email = '';
 	let password = '';

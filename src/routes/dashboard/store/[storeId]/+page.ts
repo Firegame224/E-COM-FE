@@ -1,4 +1,4 @@
-import { storeApi } from '$lib/api/store-api.js';
+import { storeApi } from '$lib/providers/store-api.js';
 
 export async function load({ params }) {
 	try {

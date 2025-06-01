@@ -1,4 +1,4 @@
-import { storeApi } from '$lib/api/store-api';
+import { storeApi } from '$lib/providers/store-api';
 import { authSession } from '$lib/helpers/auth-check';
 
 export async function load() {

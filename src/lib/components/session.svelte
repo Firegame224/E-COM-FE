@@ -3,9 +3,13 @@
 	import { profile } from '$lib/stores/user-store';
 	import { LogIn } from '@lucide/svelte';
 	import { onMount } from 'svelte';
+	import ButtonDash from './dashboard/button-dash.svelte';
+	import { orderApi } from '$lib/providers/order-api';
+	import type { orderType } from '$lib/types/order-types';
 
 	onMount(async () => {
 		const user = await authSession();
+
 		profile.set(user)
 		
 	});
@@ -30,13 +34,7 @@
 			</a>
 		</button>
 	{:else}
-		<a href="/dashboard">
-			Dashboard
-		</a>
-		<button
-		class="flex h-12 w-12 bg-transparent hover:bg-white gap-3 transition duration-700 rounded-full p-1 cursor-pointer">
-			<img src={$profile?.profile.image} alt="prof" class=" object-cover w-full h-full rounded-full" />
-		</button>
+		<ButtonDash profile={$profile}/>
 	{/if}
 </div>
  

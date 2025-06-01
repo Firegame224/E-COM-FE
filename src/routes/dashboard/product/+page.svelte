@@ -11,7 +11,7 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { onMount } from 'svelte';
-	import { productApi } from '$lib/api/product-api';
+	import { productApi } from '$lib/providers/product-api';
 	import toast from 'svelte-french-toast';
 
 	let { products } = page.data;
@@ -39,7 +39,7 @@
 		try {
 			await productApi.createProductByStoreId({ storeId, name, stok, price, image, description });
 
-			goto('/dashboard/product', { invalidateAll: true });
+			window.location.reload()
 		} finally {
 			isLoading = false;
 			isOpen = false;
@@ -65,13 +65,15 @@
 				<Label class="text-black" for="name">Nama Produk</Label>
 				<Input bind:value={name} id="name" placeholder="Contoh: Teh Botol Sosro" required />
 			</div>
-			<div class="flex flex-col gap-2">
+			<div class="w-full flex gap-2">
+			<div class="flex flex-col gap-2 w-1/2">
 				<Label class="text-black" for="price">Harga</Label>
 				<Input bind:value={price} id="price" type="number" placeholder="Contoh : 20000" required />
 			</div>
-			<div class="flex flex-col gap-2">
+			<div class="flex flex-col gap-2 w-1/2">
 				<Label class="text-black" for="stok">Stok</Label>
 				<Input bind:value={stok} id="stok" type="number" placeholder="Contoh : 10" required />
+			</div>
 			</div>
 			<div class="flex flex-col gap-2">
 				<Label class="text-black" for="desc">Deskripsi</Label>
@@ -99,7 +101,7 @@
 	>
 		<div class="flex w-full">
 			<div class="mb-5 flex w-full flex-col gap-1">
-				<Label class="text-sm font-bold text-white md:text-xl">Tambahkan Product Baru</Label>
+				<Label class="text-sm font-bold text-white md:text-xl">Produk</Label>
 				<Label class="text-[10px] text-white md:text-sm">Tambahkan Produk ke toko anda</Label>
 			</div>
 		</div>
@@ -133,10 +135,10 @@
 									<img
 										src={prod.image || "https://static.thenounproject.com/png/690578-200.png"}
 										alt="Product"
-										class="h-auto w-full rounded-sm object-cover"
+										class="h-[150px] w-full rounded-sm object-cover"
 									/>
 									<div class="flex w-full flex-col items-center gap-3 py-2">
-										<Label class="text-white">{prod.product_name}</Label>
+										<Label class="text-white text-xs max-w-full truncate">{prod.product_name}</Label>
 									</div>
 									<div
 										class="absolute inset-0 z-10 flex translate-y-10 flex-col items-center justify-center gap-3 rounded-sm bg-gradient-to-br from-orange-600 to-orange-200 p-2 opacity-0 blur-sm transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none"

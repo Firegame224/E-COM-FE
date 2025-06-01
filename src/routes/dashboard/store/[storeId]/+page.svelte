@@ -1,18 +1,19 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { storeApi } from '$lib/api/store-api';
+	import { storeApi } from '$lib/providers/store-api';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import Confirm from '$lib/components/modals/confirm.dialog.svelte';
 	import { CalendarDaysIcon, Clock, Loader, Trash } from '@lucide/svelte';
 	import { onMount } from 'svelte';
-	import toast from 'svelte-french-toast';
+	import toast from 'svelte-french-toast'; 
 	import { fade } from 'svelte/transition';
 	import { convertDate } from '$lib/helpers/date';
-	import StoreTable from '$lib/components/store/store-table.svelte';
+	import StoreTable from '$lib/components/tables/table.svelte';
 	import { productRows, productColumns } from '$lib/components/tables/table-product';
+
 
 	let { store } = page.data;
 
@@ -20,7 +21,6 @@
 	let isOpen = false;
 	let isLoading = false;
 	let onEdit = false;
-
 	// Value input
 	let name = '';
 	let info = '';
@@ -66,13 +66,12 @@
 <Confirm bind:isOpen bind:isLoading onConfirm={deleteHandle} />
 <main transition:fade={{ duration: 700 }} class="w-full p-5 h-full">
 	<div
-		class="w-full h-full gap-5 flex flex-col p-2 md:p-10 shadow bg-gradient-to-br from-orange-600 to-orange-200 py-5 rounded-sm shadow-black"
+		class="w-full h-full gap-5 flex flex-col p-2 md:p-10 shadow bg-gradient-to-br from-orange-500 to-orange-200 py-5 rounded-sm shadow-black"
 	>
 		<div class="w-full flex items-center justify-between gap-2">
 			<div class="w-full flex flex-col">
 				<Label class="text-white font-bold text-sm md:text-xl"
 					>Detail Store :
-					<p class="text-red-600">{store.store_name}</p>
 				</Label>
 				<Label class="text-[10px] md:text-sm text-white font-semibold">
 					Berisi Detail dari toko {store.store_name}
